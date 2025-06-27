@@ -83,6 +83,18 @@ public class ExpenseHandler extends Jframe{
             showMessage("Invalid amount.");
         }
     }
+    private LocalDate promptForDate(String msg) {
+        String input = JOptionPane.showInputDialog(this, msg);
+        if (input == null) return null;
+        if (input.trim().isEmpty()) return LocalDate.now();
+        try {
+            return LocalDate.parse(input.trim(), DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (Exception e) {
+            showMessage("Invalid date format.");
+            return promptForDate(msg);
+        }
+    }
+
 }
 
 
