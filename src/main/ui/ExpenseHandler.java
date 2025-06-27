@@ -103,6 +103,28 @@ public class ExpenseHandler extends Jframe{
         expenses[count] = new ExpenseRecord(category, amount, date);
         dashboard.incrementExpenseCount();
     }
+        public String getCategoryReport() {
+        int count = dashboard.getSharedExpenseCount();
+        if (count == 0) return "No expenses.";
+        StringBuilder report = new StringBuilder("Category-wise Report:\n");
+        boolean[] printed = new boolean[count];
+        for (int i = 0; i < count; i++) {
+            if (!printed[i]) {
+                String cat = expenses[i].category;
+                double total = expenses[i].amount;
+                printed[i] = true;
+                for (int j = i + 1; j < count; j++) {
+                    if (!printed[j] && expenses[j].category.equalsIgnoreCase(cat)) {
+                        total += expenses[j].amount;
+                        printed[j] = true;
+                    }
+                }
+                report.append("• ").append(cat).append(": ").append(total).append("\n");
+            }
+        }
+        return report.toString();
+    }
+
 
 }
 
