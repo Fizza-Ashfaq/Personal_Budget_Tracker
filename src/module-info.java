@@ -4,5 +4,6 @@
 /**
  * 
  */
-module Personal_Budget_Tracker {
+module gui1 {
+	requires java.desktop;
 }
