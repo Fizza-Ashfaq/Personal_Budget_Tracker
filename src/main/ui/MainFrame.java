@@ -1,4 +1,5 @@
 package main.ui;
+//private JPanel contentPanel;
 
 import java.awt.EventQueue;
 import javax.swing.*;
@@ -79,7 +80,7 @@ public class MainFrame {
 		
 		JButton btnHome = new JButton("Home");
 		btnHome.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnHome.setBounds(10, 74, 111, 42);
+		btnHome.setBounds(10, 31, 111, 42);
 		btnHome.setForeground(new Color(230, 245, 230));
 		btnHome.setBackground(new Color(0, 0, 0)); 
 		btnHome.setVisible(false);
@@ -87,7 +88,7 @@ public class MainFrame {
 
 		JButton btnAddIncome = new JButton("Add Income");
 		btnAddIncome.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnAddIncome.setBounds(10, 74, 111, 42);
+		btnAddIncome.setBounds(10, 83, 111, 42);
 		btnAddIncome.setForeground(new Color(230, 245, 230));
 		btnAddIncome.setBackground(new Color(0, 0, 0)); 
 		btnAddIncome.setVisible(false);
@@ -95,7 +96,7 @@ public class MainFrame {
 
 		JButton btnAddExpense = new JButton("Add Expense");
 		btnAddExpense.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnAddExpense.setBounds(10, 147, 111, 41);
+		btnAddExpense.setBounds(10, 135, 111, 41);
 		btnAddExpense.setForeground(new Color(230, 245, 230));
 		btnAddExpense.setBackground(new Color(0, 0, 0)); 
 		btnAddExpense.setVisible(false);
@@ -103,11 +104,47 @@ public class MainFrame {
 
 		JButton btnViewReport = new JButton("View Report");
 		btnViewReport.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnViewReport.setBounds(10, 224, 111, 41);
+		btnViewReport.setBounds(10, 186, 111, 41);
 		btnViewReport.setForeground(new Color(230, 245, 230));
 		btnViewReport.setBackground(new Color(0, 0, 0)); 
 		btnViewReport.setVisible(false);
 		panel.add(btnViewReport);
+		
+		JButton btnViewBalance = new JButton("View Balance");
+		btnViewBalance.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnViewBalance.setBounds(10, 237, 111, 42);
+		btnViewBalance.setForeground(new Color(230, 245, 230));
+		btnViewBalance.setBackground(new Color(0, 0, 0)); 
+		btnViewBalance.setVisible(false);
+		panel.add(btnViewBalance);
+		
+		JButton btnSetLimits = new JButton("Set Limits");
+		btnSetLimits.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnSetLimits.setBounds(10, 289, 111, 42);
+		btnSetLimits.setForeground(new Color(230, 245, 230));
+		btnSetLimits.setBackground(new Color(0, 0, 0)); 
+		btnSetLimits.setVisible(false);
+		panel.add(btnSetLimits);
+		
+		JButton btnEditDelete = new JButton("Edit/Delete");
+		btnEditDelete.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnEditDelete.setBounds(10, 341, 111, 42);
+		btnEditDelete.setForeground(new Color(230, 245, 230));
+		btnEditDelete.setBackground(new Color(0, 0, 0)); 
+		btnEditDelete.setVisible(false);
+		panel.add(btnEditDelete);
+		
+		JButton btnReset = new JButton("Reset Data");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnReset.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnReset.setBounds(10, 393, 111, 42);
+		btnReset.setForeground(new Color(230, 245, 230));
+		btnReset.setBackground(new Color(0, 0, 0)); 
+		btnReset.setVisible(false);
+		panel.add(btnReset);
 
 		// Title Label
 		JLabel titleLabel = new JLabel(" Personal ");
@@ -127,8 +164,15 @@ public class MainFrame {
 		Border cardBorder = BorderFactory.createLineBorder(new Color(200, 200, 200), 1);
 		
 		// Card 1: Income
-		JLabel incomeCard = new JLabel("<html><div style='text-align: center;'>💰<br>Income<br>₹20,000</div></html>");
-		incomeCard.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel incomeCard = new JLabel(
+			    "<html><div style='text-align:center;'>" +
+			    "<p style='margin:0; font-size:16px;'>💰</p>" +
+			    "<p style='margin:0; font-size:15px;'>Income</p>" +
+			    "<p style='margin:0; font-size:14px;'>₹&nbsp;20,000</p>" +
+			    "</div></html>"
+			);
+
+        incomeCard.setHorizontalAlignment(SwingConstants.CENTER);
 		incomeCard.setOpaque(true);
 		incomeCard.setBackground(new Color(230, 245, 230)); 
 		incomeCard.setFont(cardFont);
@@ -147,7 +191,7 @@ public class MainFrame {
 		frame.getContentPane().add(expenseCard);
 
 		// Card 3: Balance
-		JLabel balanceCard = new JLabel("<html><div style='justify-items: center;'>💼<br>Balance<br> ₹11,500 </div></html>");
+		JLabel balanceCard = new JLabel("<html><div style='text-align: center;'>💼<br>Balance<br> ₹11,500 </div></html>");
 		balanceCard.setHorizontalAlignment(SwingConstants.CENTER);
 		balanceCard.setOpaque(true);
 		balanceCard.setBackground(new Color(230, 245, 230)); 
@@ -162,6 +206,10 @@ public class MainFrame {
 			btnAddIncome.setVisible(isExpanded);
 			btnAddExpense.setVisible(isExpanded);
 			btnViewReport.setVisible(isExpanded);
+			btnViewBalance.setVisible(isExpanded);
+			btnSetLimits.setVisible(isExpanded);
+			btnEditDelete.setVisible(isExpanded);
+			btnReset.setVisible(isExpanded);
 			
 			 if (isExpanded) {
 			        panel.setBounds(0, 0, 131, 805);
@@ -173,8 +221,8 @@ public class MainFrame {
 
 
 		// Card 4: Top Categories
-		JLabel categoriesCard = new JLabel("<html><div style='text-align: left;'>🔝 Top Categories:<br>- Food: ₹3,000<br>- Travel: ₹2,000</div></html>");
-		categoriesCard.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel categoriesCard = new JLabel("<html><div style='text-align: center;'>🔝 Top Categories:<br> <p style='margin:10; '>- Food: ₹3,000<br>- Travel: ₹2,000</p></div></html>");
+		categoriesCard.setHorizontalAlignment(SwingConstants.CENTER);
 		categoriesCard.setVerticalAlignment(SwingConstants.TOP);
 		categoriesCard.setOpaque(true);
 		categoriesCard.setBackground(new Color(230, 245, 230));
@@ -184,8 +232,8 @@ public class MainFrame {
 		frame.getContentPane().add(categoriesCard);
 
 		// Card 5: Warnings
-		JLabel warningsCard = new JLabel("<html><div style='text-align: left;'>⚠️ Warnings:<br>- Food category limit 90% reached</div></html>");
-		warningsCard.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel warningsCard = new JLabel("<html><div style='text-align: center;'>⚠️ Warnings:<br><p style='margin:10; '>- Food category limit 90% reached</p></div></html>");
+		warningsCard.setHorizontalAlignment(SwingConstants.CENTER);
 		warningsCard.setVerticalAlignment(SwingConstants.TOP);
 		warningsCard.setOpaque(true);
 		warningsCard.setBackground(new Color(230, 245, 230));
