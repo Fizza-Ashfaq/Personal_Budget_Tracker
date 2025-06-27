@@ -1,4 +1,4 @@
-package gui1;
+package main.ui;
 import java.time.LocalDate;
 
 public class IncomeRecord{
