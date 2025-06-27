@@ -64,7 +64,25 @@ public class ExpenseHandler extends Jframe{
             showMessage("Invalid amount.");
         }
     }
-     
+
+      private void addExpenseDialog() {
+        String category = JOptionPane.showInputDialog(this, "Enter expense category:");
+        if (category == null || category.trim().isEmpty()) return;
+
+        String amtStr = JOptionPane.showInputDialog(this, "Enter amount:");
+        try {
+            double amount = Double.parseDouble(amtStr);
+            if (amount < 0) throw new NumberFormatException();
+
+            LocalDate date = promptForDate("Enter date (yyyy-MM-dd) or leave blank for today:");
+            if (date == null) return;
+
+            addExpense(category, amount, date);
+            showMessage("Expense added.");
+        } catch (NumberFormatException e) {
+            showMessage("Invalid amount.");
+        }
+    }
 }
 
 
