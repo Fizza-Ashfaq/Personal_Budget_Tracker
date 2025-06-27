@@ -149,6 +149,11 @@ public class ExpenseHandler extends Jframe{
             }
         }
     }
+     public static void main(String[] args) {
+        SwingUtilities.invokeLater(() ->
+                new ExpenseHandler(new ExpenseRecord[100], new MainDashboard()).setVisible(true)
+        );
+    }
 
 
 
