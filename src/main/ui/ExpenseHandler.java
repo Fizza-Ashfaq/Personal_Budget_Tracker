@@ -94,6 +94,15 @@ public class ExpenseHandler extends Jframe{
             return promptForDate(msg);
         }
     }
+       private void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
+    }
+
+    public void addExpense(String category, double amount, LocalDate date) {
+        int count = dashboard.getSharedExpenseCount();
+        expenses[count] = new ExpenseRecord(category, amount, date);
+        dashboard.incrementExpenseCount();
+    }
 
 }
 
