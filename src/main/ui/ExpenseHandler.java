@@ -124,6 +124,16 @@ public class ExpenseHandler extends Jframe{
         }
         return report.toString();
     }
+        public String getSortedExpenseList() {
+        int count = dashboard.getSharedExpenseCount();
+        if (count == 0) return "No expenses.";
+        StringBuilder list = new StringBuilder("Sorted Expenses:\n");
+        for (int i = 0; i < count; i++) {
+            ExpenseRecord ex = expenses[i];
+            list.append("• ").append(ex.date).append(" | ").append(ex.category).append(" - ").append(ex.amount).append("\n");
+        }
+        return list.toString();
+    }
 
 
 }
