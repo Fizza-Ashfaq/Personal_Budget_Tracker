@@ -134,6 +134,22 @@ public class ExpenseHandler extends Jframe{
         }
         return list.toString();
     }
+        public void sortExpensesByDateOrAmount(boolean byDate) {
+        int count = dashboard.getSharedExpenseCount();
+        for (int i = 0; i < count - 1; i++) {
+            for (int j = i + 1; j < count; j++) {
+                boolean condition = byDate
+                        ? expenses[i].date.isAfter(expenses[j].date)
+                        : expenses[i].amount > expenses[j].amount;
+                if (condition) {
+                    ExpenseRecord temp = expenses[i];
+                    expenses[i] = expenses[j];
+                    expenses[j] = temp;
+                }
+            }
+        }
+    }
+
 
 
 }
