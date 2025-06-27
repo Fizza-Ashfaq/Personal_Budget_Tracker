@@ -19,11 +19,16 @@ public class ExpenseLimitManager extends JFrame {
         this.expenseCount = expenseCount;
 
         setTitle("Expense Limit Manager");
-        setSize(450, 500); // Increased size for 6 buttons
+        setSize(400, 450);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new GridLayout(6, 1)); // 6 rows for 6 buttons
 
+        // Main panel with vertical BoxLayout
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Create buttons
         JButton setLimitBtn = new JButton("Set Limit");
         JButton editDeleteExpenseBtn = new JButton("Edit/Delete Expense");
         JButton resetBtn = new JButton("Reset All Data");
@@ -31,20 +36,35 @@ public class ExpenseLimitManager extends JFrame {
         JButton backBtn = new JButton("Back to Menu");
         JButton exitBtn = new JButton("Exit");
 
-        add(setLimitBtn);
-        add(editDeleteExpenseBtn);
-        add(resetBtn);
-        add(summaryBtn);
-        add(backBtn);
-        add(exitBtn); // Add exit button at the end
+        // Add buttons with spacing
+        addButton(mainPanel, setLimitBtn);
+        addButton(mainPanel, editDeleteExpenseBtn);
+        addButton(mainPanel, resetBtn);
+        addButton(mainPanel, summaryBtn);
+        addButton(mainPanel, backBtn);
+        addButton(mainPanel, exitBtn);
 
+        // Add panel to frame
+        add(mainPanel);
+
+        // Button listeners
         setLimitBtn.addActionListener(e -> setLimit());
         editDeleteExpenseBtn.addActionListener(e -> editOrDeleteExpense());
         resetBtn.addActionListener(e -> resetLimits());
         summaryBtn.addActionListener(e -> showSummary());
         backBtn.addActionListener(e -> dispose());
-        exitBtn.addActionListener(e -> System.exit(0)); // Exit entire app
+        exitBtn.addActionListener(e -> System.exit(0));
     }
+
+    private void addButton(JPanel panel, JButton button) {
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setMaximumSize(new Dimension(250, 40));
+        panel.add(button);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space between buttons
+    }
+
+    // Remaining methods stay unchanged (setLimit, resetLimits, showSummary, etc.)
+    // ...
 
     private void setLimit() {
         String category = JOptionPane.showInputDialog(this, "Enter category:");
@@ -77,19 +97,14 @@ public class ExpenseLimitManager extends JFrame {
                 "Confirm Reset", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            // Reset limits
             limitCount = 0;
-
-            // Reset expenses
             for (int i = 0; i < expenseCount; i++) {
                 expenses[i] = null;
             }
             expenseCount = 0;
-
             showMessage("All limits and expenses have been reset.");
         }
     }
-
 
     private void showSummary() {
         if (limitCount == 0 && expenseCount == 0) {
@@ -114,10 +129,8 @@ public class ExpenseLimitManager extends JFrame {
         summary.append("\nTotal Limit: ").append(totalLimit)
                .append("\nTotal Expenses: ").append(totalExpense);
 
-        
         showMessage(summary.toString());
     }
-
 
     private void editOrDeleteExpense() {
         if (expenseCount == 0) {
@@ -128,11 +141,12 @@ public class ExpenseLimitManager extends JFrame {
         StringBuilder builder = new StringBuilder("Choose index to edit/delete:\n");
         for (int i = 0; i < expenseCount; i++) {
             builder.append(i).append(": ").append(expenses[i].category).append(", ")
-                    .append(expenses[i].amount).append(", ").append(expenses[i].date).append("\n");
+                   .append(expenses[i].amount).append(", ").append(expenses[i].date).append("\n");
         }
 
         String input = JOptionPane.showInputDialog(this, builder.toString());
         if (input == null) return;
+
         try {
             int index = Integer.parseInt(input);
             if (index < 0 || index >= expenseCount) throw new NumberFormatException();

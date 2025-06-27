@@ -26,7 +26,7 @@ public class MainDashboard extends JFrame {
 
         incomeBtn.addActionListener(e -> {
             MainFrameIncomeUI incomeUI = new MainFrameIncomeUI();
-            incomeUI.setVisible(true);
+//            incomeUI.setVisible(true);
         });
 
         expenseBtn.addActionListener(e -> {
