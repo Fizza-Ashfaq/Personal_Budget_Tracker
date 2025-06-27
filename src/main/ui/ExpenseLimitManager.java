@@ -18,7 +18,7 @@ public class ExpenseLimitManager extends JFrame {
         this.expenses = expenses;
         this.expenseCount = expenseCount;
 
-        setTitle("⚠️ Expense Limit Manager");
+        setTitle("Expense Limit Manager");
         setSize(450, 500); // Increased size for 6 buttons
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -67,7 +67,7 @@ public class ExpenseLimitManager extends JFrame {
             limitAmounts[limitCount++] = amount;
             showMessage("Limit set for " + category);
         } catch (NumberFormatException e) {
-            showMessage("❌ Invalid number.");
+            showMessage("Invalid number.");
         }
     }
 
@@ -93,11 +93,11 @@ public class ExpenseLimitManager extends JFrame {
 
     private void showSummary() {
         if (limitCount == 0 && expenseCount == 0) {
-            showMessage("📭 No limits or expenses found.");
+            showMessage("No limits or expenses found.");
             return;
         }
 
-        StringBuilder summary = new StringBuilder("📋 Expense & Limit Summary:\n\n");
+        StringBuilder summary = new StringBuilder("Expense & Limit Summary:\n\n");
 
         double totalLimit = 0;
         for (int i = 0; i < limitCount; i++) {
@@ -111,8 +111,8 @@ public class ExpenseLimitManager extends JFrame {
             totalExpense += expenses[i].amount;
         }
 
-        summary.append("\n💰 Total Limit: ").append(totalLimit)
-               .append("\n💸 Total Expenses: ").append(totalExpense);
+        summary.append("\nTotal Limit: ").append(totalLimit)
+               .append("\nTotal Expenses: ").append(totalExpense);
 
         
         showMessage(summary.toString());
@@ -121,7 +121,7 @@ public class ExpenseLimitManager extends JFrame {
 
     private void editOrDeleteExpense() {
         if (expenseCount == 0) {
-            showMessage("📍 No expenses.");
+            showMessage("No expenses.");
             return;
         }
 
@@ -158,16 +158,16 @@ public class ExpenseLimitManager extends JFrame {
                 exp.amount = amt;
                 exp.category = cat;
                 exp.date = date;
-                showMessage("✅ Expense updated.");
+                showMessage("Expense updated.");
             } else if (choice == 1) {
                 for (int i = index; i < expenseCount - 1; i++) {
                     expenses[i] = expenses[i + 1];
                 }
                 expenseCount--;
-                showMessage("✅ Expense deleted.");
+                showMessage("Expense deleted.");
             }
         } catch (Exception e) {
-            showMessage("❌ Invalid input.");
+            showMessage("Invalid input.");
         }
     }
 
@@ -177,7 +177,7 @@ public class ExpenseLimitManager extends JFrame {
         try {
             return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } catch (DateTimeParseException e) {
-            showMessage("❌ Invalid date format. Use yyyy-MM-dd.");
+            showMessage("Invalid date format. Use yyyy-MM-dd.");
             return null;
         }
     }
